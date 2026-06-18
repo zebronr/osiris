@@ -1,5 +1,33 @@
 <?php
 // db.php
+$host = 'gateway01.ap-southeast-1.prod.alicloud.tidbcloud.com';
+$port = '4000'; // Back to the native database port
+$db   = 'osiris_db';
+$user = '3Z9rykFbjFwxjaN.root'; 
+$pass = 'P64DR34r7F4fF2Ta';     
+$charset = 'utf8mb4';
+
+try {
+    // We pass standard query parameters inside the DSN that force the MySQL driver to encrypt
+    $dsn = "mysql:host=$host;port=$port;dbname=$db;charset=$charset;sslmode=required";
+    
+    $options = [
+        PDO::ATTR_ERRMODE            => PDO::ERRMODE_EXCEPTION,
+        PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC,
+        PDO::ATTR_EMULATE_PREPARES   => false,
+    ];
+    
+    $pdo = new PDO($dsn, $user, $pass, $options);
+} catch (PDOException $e) {
+    header('Content-Type: application/json');
+    echo json_encode(["ok" => false, "error" => $e->getMessage()]);
+    exit;
+}
+
+$message = "";
+$messageType = "info"; 
+$displayDate = "";<?php
+// db.php
 // 1. We change the host to the dedicated port-443 server gateway
 $host = 'gateway01.ap-southeast-1.prod.alicloud.tidbcloud.com';
 $port = '443'; 
