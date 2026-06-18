@@ -1,9 +1,9 @@
 <?php
 // db.php
-$host = 'localhost';
-$db   = 'osiris_tracker_db';
-$user = 'root'; // Change if your MySQL setup requires a password
-$pass = '';     
+$host = 'gateway01.ap-southeast-1.prod.alicloud.tidbcloud.com';
+$db   = 'osiris_db';
+$user = '3Z9rykFbjFwxjaN.root'; // Change if your MySQL setup requires a password
+$pass = 'P64DR34r7F4fF2Ta';     
 $charset = 'utf8mb4';
 
 $dsn = "mysql:host=$host;dbname=$db;charset=$charset";
