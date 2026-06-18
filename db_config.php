@@ -14,9 +14,10 @@ try {
         PDO::ATTR_ERRMODE            => PDO::ERRMODE_EXCEPTION,
         PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC,
         PDO::ATTR_EMULATE_PREPARES   => false,
-        // Using modern syntax string-keys to bypass version deprecation warnings
-        'mysql:ssl_ca'               => true,
-        'mysql:ssl_verify_cert'      => false
+        // 1011 is the hardcoded system ID for MYSQL_ATTR_SSL_CA
+        1011                         => true,
+        // 1014 is the hardcoded system ID for MYSQL_ATTR_SSL_VERIFY_SERVER_CERT
+        1014                         => false
     ];
     
     $pdo = new PDO($dsn, $user, $pass, $options);
