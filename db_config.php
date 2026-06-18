@@ -14,9 +14,20 @@ $options = [
 ];
 
 try {
-     $pdo = new PDO($dsn, $user, $pass, $options);
-} catch (\PDOException $e) {
-     throw new \PDOException($e->getMessage(), (int)$e->getCode());
+    // Append sslmode=verify-ca or sslmode=required directly into the connection string
+    $dsn = "mysql:host=$host;port=$port;dbname=$dbname;charset=utf8mb4;sslmode=required";
+    
+    $options = [
+        PDO::ATTR_ERRMODE            => PDO::ERRMODE_EXCEPTION,
+        PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC
+    ];
+    
+    $pdo = new PDO($dsn, $username, $password, $options);
+} catch (PDOException $e) {
+    header('Content-Type: application/json');
+    // For debugging right now, let's output the error if it fails again
+    echo json_encode(["ok" => false, "error" => $e->getMessage()]);
+    exit;
 }
 
 $message = "";
